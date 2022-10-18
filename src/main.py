@@ -10,7 +10,7 @@ driver: webdriver = None
 if len(sys.argv) == 2:
     driver = web.init_driver(sys.argv[1])
 elif len(sys.argv) == 3:
-    driver = web.init_driver(sys.argv[2], path=sys.argv[1])
+    driver = web.init_driver(sys.argv[1], path=sys.argv[2])
 else:
     print("Error: Incorrect arguments. Usage: main.py [browser] [(optional) path_to_browser_executable]")
     exit()
