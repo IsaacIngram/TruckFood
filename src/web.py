@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver import FirefoxOptions
 
 
 def init_driver(browser: str, path: str = None) -> webdriver:
@@ -21,7 +22,9 @@ def init_driver(browser: str, path: str = None) -> webdriver:
             return webdriver.Chrome(executable_path=path)
     elif browser == "firefox":
         if path is None:
-            return webdriver.Firefox()
+            options = FirefoxOptions()
+            options.add_argument("--headless")
+            return webdriver.Firefox(options=options)
         else:
             return webdriver.Firefox(executable_path=path)
     elif browser == "chromium_edge":
