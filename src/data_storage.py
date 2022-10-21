@@ -10,17 +10,18 @@ class DataStorage:
         """
         self.file_path = file_path
 
-    def write_data(self, data: str, times_this_week: int) -> None:
+    def write_data(self, data: str, times_this_week: int, timestamp: str) -> None:
         """
         Write data to a datafile
         :param data: The data to write
-        :param times_this_week
+        :param times_this_week The number of times this message has been edited this week
+        :param timestamp: The timestamp of the last message posting
         :return: None
         """
         with open(self.file_path, 'w') as file:
-            file.write(str(data.__hash__()) + "\n" + str(times_this_week))
+            file.write(str(data.__hash__()) + "\n" + str(times_this_week) + "\n" + timestamp)
 
-    def read_data(self) -> (str, int):
+    def read_data(self) -> (str, int, str):
         """
         Get data from the datafile
         :return: A string containing the first line of the file and an integer containing the second line
@@ -28,7 +29,7 @@ class DataStorage:
         with open(self.file_path) as file:
             # Append all lines of the file to the same output string
             output: str = ""
-            return file.readline(0), int(file.readline(1))
+            return file.readline(0), int(file.readline(1)), file.readline(2)
 
     def compare_data(self, current_data: str):
         """
