@@ -1,3 +1,5 @@
+import os
+
 from slack import WebClient
 
 
@@ -9,8 +11,8 @@ class Bot:
         self.client = WebClient(token)
 
     def send_message(self, message: str):
-        response = self.client.chat_postMessage(channel="#truckfood-bot", text=message)
+        response = self.client.chat_postMessage(channel=os.environ["SLACK_CHANNEL"], text=message)
         return response
 
     def edit_message(self, new_message: str, timestamp: str):
-        self.client.chat_update(channel="#truckfood-bot", ts=timestamp, text=new_message)
+        self.client.chat_update(channel=os.environ["SLACK_CHANNEL"], ts=timestamp, text=new_message)
