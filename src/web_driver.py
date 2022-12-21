@@ -56,7 +56,7 @@ class WebDriver:
             print("Safely quitting")
             quit()
 
-    def get_food_trucks(self) -> str:
+    def get_description(self) -> str:
         """
         Get the food truck information based on RIT's food truck webpage, which can be found here:
         https://www.rit.edu/fa/diningservices/food-trucks
