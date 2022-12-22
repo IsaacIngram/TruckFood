@@ -1,7 +1,34 @@
+import datetime
+
 from selenium import webdriver
 from selenium.webdriver import FirefoxOptions
 from selenium.webdriver import ChromeOptions
 from selenium.webdriver.common.by import By
+from datetime import date
+
+
+def _month_string_to_number(name: str):
+    m = {
+        'jan': 1,
+        'feb': 2,
+        'mar': 3,
+        'apr': 4,
+        'may': 5,
+        'jun': 6,
+        'jul': 7,
+        'aug': 8,
+        'sep': 9,
+        'oct': 10,
+        'nov': 11,
+        'dec': 12
+    }
+    s = name.strip()[:3].lower()
+
+    try:
+        out = m[s]
+        return out
+    except ValueError:
+        raise ValueError('Not a month')
 
 
 class WebDriver:
@@ -97,3 +124,65 @@ class WebDriver:
         :return: None
         """
         self.driver.close()
+
+    def get_dates(self) -> (datetime.date, datetime.date):
+        """
+        Gets a tuple with the start date and end date of the food trucks according to the description
+        :return: A datetime.date, datetime.date tuple
+        """
+
+        # Variables for storing info while we parse
+        start_month_string: str = ""
+        start_day: int = 0
+        end_month_string: str = ""
+        end_day: int = 0
+
+        # Split the first line of the description
+        split_line = self.get_description().split("\n")[0].split(" ")
+
+        # Iterate through every word
+        for i in range(len(split_line)):
+            # Skip over all non-numeric words
+            if split_line[i].isnumeric():
+                # Decide whether to set the start date or end date
+                if start_day == 0:
+                    # Setting the start date
+                    start_day = int(split_line[i])
+                    start_month_string = split_line[i-1]
+                    print("Start day: " + str(start_day))
+                else:
+                    # Setting the end date
+                    end_day = int(split_line[i])
+                    end_month_string = split_line[i-1]
+                    print("End day: " + str(end_day))
+                    break
+
+        # In the case that one of the days was not set, return empty dates
+        if start_day == 0 or end_day == 0:
+            return (None, None)
+
+        # Get rid of unnecessary punctuation and whitespace
+        start_month_string = start_month_string.strip()
+        start_month_string.replace(",", "")
+        start_month_string.replace(".", "")
+        end_month_string = end_month_string.strip()
+        end_month_string.replace(",", "")
+        end_month_string.replace(".", "")
+
+        # Switch to all lowercase
+        start_month_string = start_month_string.lower()
+        end_month_string = end_month_string.lower()
+
+        # Get numerical month values
+        start_month = _month_string_to_number(start_month_string)
+        end_month = _month_string_to_number(end_month_string)
+
+        # Get current year
+        year = datetime.datetime.now().year
+
+        # Create datetime objects
+        start = datetime.datetime(year, start_month, start_day)
+        end = datetime.datetime(year, end_month, end_day)
+
+        return start, end
+
