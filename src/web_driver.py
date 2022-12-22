@@ -90,3 +90,10 @@ class WebDriver:
                 output = output + "\t" + element.text + "\n"
 
         return output
+
+    def terminate(self) -> None:
+        """
+        Terminate this webdriver
+        :return: None
+        """
+        self.driver.close()
