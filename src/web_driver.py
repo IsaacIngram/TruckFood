@@ -11,7 +11,7 @@ class WebDriver:
 
     driver: webdriver
 
-    def __init__(self, browser: str, headless: bool = False):
+    def __init__(self, browser: str, headless: bool = False) -> None:
         """
         Creates this webdriver and establishes a connection
         :param browser:
@@ -58,9 +58,9 @@ class WebDriver:
 
     def get_description(self) -> str:
         """
-        Get the food truck information based on RIT's food truck webpage, which can be found here:
+        Get the currently posted information about food truck's from RIT's webpage which can be found here:
         https://www.rit.edu/fa/diningservices/food-trucks
-        :return: A properly formatted string containing the food truck information
+        :return: A string
         """
 
         # Get the food trucks webpage
