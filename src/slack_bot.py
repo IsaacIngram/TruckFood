@@ -7,12 +7,16 @@ class Bot:
 
     client: WebClient
 
-    def __init__(self, token: str):
+    def connect(self, token: str):
         """
-        Create a new Slack Bot
-        :param token: The Slack token
+        Connect to Slack
+        :param token:
+        :return:
         """
         self.client = WebClient(token)
+
+    def disconnect(self):
+        self.client = None
 
     def send_message(self, message: str):
         """
@@ -20,8 +24,11 @@ class Bot:
         :param message: A string
         :return: The response from Slack
         """
-        response = self.client.chat_postMessage(channel=os.environ["SLACK_CHANNEL"], text=message)
-        return response
+        if self.client is None:
+            return None
+        else:
+            response = self.client.chat_postMessage(channel=os.environ["SLACK_CHANNEL"], text=message)
+            return response
 
     def edit_message(self, new_message: str, timestamp: str) -> None:
         """
@@ -30,4 +37,7 @@ class Bot:
         :param timestamp: A string
         :return: None
         """
-        self.client.chat_update(channel=os.environ["SLACK_CHANNEL"], ts=timestamp, text=new_message)
+        if self.client is None:
+            return None
+        else:
+            self.client.chat_update(channel=os.environ["SLACK_CHANNEL"], ts=timestamp, text=new_message)
