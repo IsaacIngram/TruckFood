@@ -35,6 +35,7 @@ class Database:
         :return: None
         """
         return None
+        # TODO implement set_description
 
     def get_description(self) -> int:
         """
@@ -42,6 +43,7 @@ class Database:
         :return: An integer
         """
         pass
+        # TODO implement get_description
 
     def set_start_date(self, date: str) -> None:
         """
@@ -50,6 +52,7 @@ class Database:
         :return: None
         """
         pass
+        # TODO implement set_start_date
 
     def set_end_date(self, date: str) -> None:
         """
@@ -58,6 +61,7 @@ class Database:
         :return: None
         """
         pass
+        # TODO implement set_end_date
 
     def get_start_date(self) -> str:
         """
@@ -65,6 +69,7 @@ class Database:
         :return: A string
         """
         pass
+        # TODO implement get_start_date
 
     def get_end_date(self) -> str:
         """
@@ -72,6 +77,7 @@ class Database:
         :return: A string
         """
         pass
+        # TODO implement get_end_date
 
     def set_timestamp(self, timestamp: str) -> None:
         """
@@ -80,6 +86,7 @@ class Database:
         :return: None
         """
         pass
+        # TODO implement set_timestamp
 
     def get_timestamp(self) -> str:
         """
@@ -87,3 +94,4 @@ class Database:
         :return: A string
         """
         pass
+        # TODO implement get_timestamp
