@@ -30,7 +30,7 @@ class Bot:
             response = self.client.chat_postMessage(channel=os.environ["SLACK_CHANNEL"], text=message)
             return response
 
-    def edit_message(self, new_message: str, timestamp: str) -> None:
+    def edit_message(self, new_message: str, timestamp: str):
         """
         Edit a Slack message with a certain timestamp
         :param new_message: A string
@@ -40,4 +40,4 @@ class Bot:
         if self.client is None:
             return None
         else:
-            self.client.chat_update(channel=os.environ["SLACK_CHANNEL"], ts=timestamp, text=new_message)
+            return self.client.chat_update(channel=os.environ["SLACK_CHANNEL"], ts=timestamp, text=new_message)
