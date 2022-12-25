@@ -29,18 +29,19 @@ class Database:
         """
         self._client.close()
 
-    def set_description(self) -> None:
+    def set_description(self, description: str) -> None:
         """
         Set the description
+        :param description A string
         :return: None
         """
         return None
         # TODO implement set_description
 
-    def get_description(self) -> int:
+    def get_description(self) -> str:
         """
         Get the description
-        :return: An integer
+        :return: A string
         """
         pass
         # TODO implement get_description
